@@ -35,7 +35,7 @@ void PID::UpdateError(double cte) {
    **/
   PID::p_error = cte;
 //   if limit flag is true then no more integration of errors 
-  PID::i_error = PID::limit_flag ? PID::i_error : PID::i_error + cte*PID::delta_t*0.5;
+  PID::i_error = PID::limit_flag ? PID::i_error : PID::i_error + cte*PID::delta_t; // *0.5 using this ratio will help reduce the swirle 
   PID::d_error = PID::delta_t > 0 ? (PID::p_error - PID::prev_error)/PID::delta_t : 0;
   PID::prev_error = PID::p_error;
 //   std::cout<< p_error << " P  " << d_error << "  d  " << i_error << "   i   " << std::endl;
